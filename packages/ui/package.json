@@ -6,8 +6,15 @@
   ],
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist",
-    "./base.css": "./base.css"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./dist/base.css": {
+      "import": "./dist/base.css",
+      "require": "./dist/base.css"
+    }
   },
   "license": "MIT",
   "scripts": {
