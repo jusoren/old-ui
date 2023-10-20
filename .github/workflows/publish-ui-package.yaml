@@ -1,0 +1,84 @@
+name: Publish UI package
+
+on:
+  push:
+    branches: ["main"]
+  # release:
+  #   types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 20
+
+      - uses: marceloprado/has-changed-path@v1.0.1
+        id: changed-ui
+        with:
+          paths: packages/ui
+
+      # Setup .npmrc file to publish to GitHub Packages
+      - uses: actions/setup-node@v3
+        if: steps.changed-ui.outputs.changed == 'true'
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - uses: pnpm/action-setup@v2
+        if: steps.changed-ui.outputs.changed == 'true'
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        if: steps.changed-ui.outputs.changed == 'true'
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        if: steps.changed-ui.outputs.changed == 'true'
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        if: steps.changed-ui.outputs.changed == 'true'
+        run: pnpm install
+
+      - run: pnpm build --filter ui
+        if: steps.changed-ui.outputs.changed == 'true'
+        working-directory: ./packages/ui
+
+      - name: Change package name from 'ui' to '@jusoren/ui'
+        if: steps.changed-ui.outputs.changed == 'true'
+        uses: maxgfr/github-change-json@main
+        with:
+          key: 'name'
+          value: '@jusoren/ui'
+          path: ./packages/ui/package.json
+
+      - run: pnpm publish --access public --no-git-checks
+        if: steps.changed-ui.outputs.changed == 'true'
+        working-directory: ./packages/ui
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Revert package name to 'ui'
+        if: steps.changed-ui.outputs.changed == 'true'
+        uses: maxgfr/github-change-json@main
+        with:
+          key: 'name'
+          value: 'ui'
+          path: ./packages/ui/package.json
