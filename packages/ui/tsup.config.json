@@ -2,9 +2,10 @@
   "treeshake": true,
   "splitting": true,
   "entry": ["index.ts"],
-  "format": ["esm"],
+  "format": ["cjs", "esm"],
   "dts": true,
   "minify": true,
   "clean": true,
-  "external": ["react"]
+  "external": ["react"],
+  "onSuccess": "cp base.css dist"
 }
