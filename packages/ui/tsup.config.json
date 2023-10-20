@@ -1,0 +1,10 @@
+{
+  "treeshake": true,
+  "splitting": true,
+  "entry": ["index.ts"],
+  "format": ["esm"],
+  "dts": true,
+  "minify": true,
+  "clean": true,
+  "external": ["react"]
+}

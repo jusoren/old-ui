@@ -19,7 +19,7 @@ export function Card({
       rel="noopener noreferrer"
       target="_blank"
     >
-      <h2 className="text-xl font-semibold text-blue-500">
+      <h2 className="text-xl font-semibold text-red-500">
         {title} <span>-&gt;</span>
       </h2>
       <p>{children}</p>
