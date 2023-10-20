@@ -1,11 +1,52 @@
 # Introduction
- 
-Welcome to Nextra! This is a basic docs template. You can use it as a starting point for your own project :)
 
-## What is Nextra?
+This is **@jusoren/ui**, yet another React library. Actually, I want to use this library only for personal needs. But, if this can be useful for people out there, why not?
 
-A **simple**, **powerful** and **flexible** site generation framework with everything you love from Next.js.
+## Quick Start
 
-## Documentation
+Since this library depends on `tailwindcss`, let's setup it first.
 
-The documentation is available at [https://nextra.site](https://nextra.site).
+```bash copy
+pnpm add -D tailwindcss postcss autoprefixer @tailwindcss/forms
+pnpm add @jusoren/ui
+pnpm tailwindcss init -p
+```
+
+After that, update the `tailwindcss` config file. This can be slightly different based on your project setup.
+
+import { Tabs } from "nextra/components";
+
+<Tabs items={['tailwind.config.ts', 'tailwind.config.js']}>
+  <Tabs.Tab>
+    ```js copy
+    import type { Config } from "tailwindcss";
+    import sharedConfig from "@jusoren/ui/tailwind.config.js";
+
+    const config: Pick<Config, "content" | "presets"> = {
+      content: [
+        "./src/**/*.{js,ts,jsx,tsx,mdx}",
+        "./node_modules/@jusoren/ui/dist/**/*.js",
+      ],
+      presets: [sharedConfig],
+    };
+
+    export default config;
+    ```
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```js copy
+    const sharedConfig = require("@jusoren/ui/tailwind.config.js");
+
+    /** @type {import('tailwindcss').Config} */
+    module.exports = {
+      content: [
+        "./src/**/*.{js,ts,jsx,tsx,mdx}",
+        "./node_modules/@jusoren/ui/dist/**/*.js",
+      ],
+      presets: [sharedConfig],
+    };
+    ```
+
+  </Tabs.Tab>
+</Tabs>
