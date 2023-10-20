@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import * as React from "react";
 
 export function Card({
@@ -13,12 +14,12 @@ export function Card({
 }): JSX.Element {
   return (
     <a
-      className={className}
+      className={clsx(className)}
       href={`${href}?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo"`}
       rel="noopener noreferrer"
       target="_blank"
     >
-      <h2>
+      <h2 className="text-xl font-semibold text-blue-500">
         {title} <span>-&gt;</span>
       </h2>
       <p>{children}</p>
