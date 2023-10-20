@@ -14,23 +14,23 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 20
 
-      - uses: marceloprado/has-changed-path@v1.0.1
-        id: changed-ui
+      - name: Compare npm with local (versions)
+        uses: Rober19/compare-npm-versions-ci@master
+        id: package_version
         with:
-          paths: packages/ui
+          path: './packages/ui'
+          npm_package_name: '@jusoren/ui'
 
       # Setup .npmrc file to publish to GitHub Packages
       - uses: actions/setup-node@v3
-        if: steps.changed-ui.outputs.changed == 'true'
+        if: steps.package_version.outputs.npm_is_greater == 'false'
         with:
           node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
 
       - uses: pnpm/action-setup@v2
-        if: steps.changed-ui.outputs.changed == 'true'
+        if: steps.package_version.outputs.npm_is_greater == 'false'
         name: Install pnpm
         id: pnpm-install
         with:
@@ -38,14 +38,14 @@ jobs:
           run_install: false
 
       - name: Get pnpm store directory
-        if: steps.changed-ui.outputs.changed == 'true'
+        if: steps.package_version.outputs.npm_is_greater == 'false'
         id: pnpm-cache
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@v3
-        if: steps.changed-ui.outputs.changed == 'true'
+        if: steps.package_version.outputs.npm_is_greater == 'false'
         name: Setup pnpm cache
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
@@ -54,14 +54,14 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        if: steps.changed-ui.outputs.changed == 'true'
+        if: steps.package_version.outputs.npm_is_greater == 'false'
         run: pnpm install
 
       - run: pnpm build --filter ui
-        if: steps.changed-ui.outputs.changed == 'true'
+        if: steps.package_version.outputs.npm_is_greater == 'false'
 
       - name: Change package name from 'ui' to '@jusoren/ui'
-        if: steps.changed-ui.outputs.changed == 'true'
+        if: steps.package_version.outputs.npm_is_greater == 'false'
         uses: maxgfr/github-change-json@main
         with:
           key: 'name'
@@ -69,13 +69,13 @@ jobs:
           path: ./packages/ui/package.json
 
       - run: pnpm publish --access public --no-git-checks
-        if: steps.changed-ui.outputs.changed == 'true'
+        if: steps.package_version.outputs.npm_is_greater == 'false'
         working-directory: ./packages/ui
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Revert package name to 'ui'
-        if: steps.changed-ui.outputs.changed == 'true'
+        if: steps.package_version.outputs.npm_is_greater == 'false'
         uses: maxgfr/github-change-json@main
         with:
           key: 'name'
