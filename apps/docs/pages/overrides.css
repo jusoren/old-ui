@@ -1,0 +1,4 @@
+button[role="tab"]:focus-visible {
+  box-shadow: none !important;
+  background-color: rgba(182, 182, 182, 0.1);
+}
