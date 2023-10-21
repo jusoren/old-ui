@@ -50,3 +50,12 @@ import { Tabs } from "nextra/components";
 
   </Tabs.Tab>
 </Tabs>
+
+Next, you'll need to import `base.css` file once in the root component. If you're using Next.js,
+it should be `app/layout.tsx` file.
+
+```js copy
+import "@jusoren/ui/base.css";
+```
+
+That css file loads `Manrope` font, adds `@tailwind` directives, and sets appropiate global styles.
