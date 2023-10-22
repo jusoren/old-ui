@@ -21,6 +21,11 @@ const config: DocsThemeConfig = {
       </span>
     ),
   },
+  useNextSeoProps() {
+    return {
+      titleTemplate: "%s - @jusoren/ui",
+    };
+  },
 };
 
 export default config;
