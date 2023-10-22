@@ -6,7 +6,9 @@ import { Callout } from "nextra/components";
   Both the library and documentation are under construction.
 </Callout>
 
-This is **@jusoren/ui**, yet another React library. Actually, I want to use this library only for personal needs. But, if this can be useful for people out there, why not?
+This is **@jusoren/ui**, yet another React library. Actually, I want to use this
+library only for other personal projects. But, if this can be useful for people out there,
+why not?
 
 ## Quick Start
 
@@ -18,50 +20,36 @@ pnpm add @jusoren/ui
 pnpm tailwindcss init -p
 ```
 
-After that, update the `tailwindcss` config file. This can be slightly different based on your project setup.
+After that, update the `tailwindcss` config file.
 
-import { Tabs } from "nextra/components";
+```js copy
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@jusoren/ui/dist/**/*.js",
+  ],
+  presets: [require("@jusoren/ui/tailwind.config.js")],
+};
+```
 
-<Tabs items={['tailwind.config.ts', 'tailwind.config.js']}>
-  <Tabs.Tab>
-    ```js copy
-    import type { Config } from "tailwindcss";
-    import sharedConfig from "@jusoren/ui/tailwind.config.js";
-
-    const config: Pick<Config, "content" | "presets"> = {
-      content: [
-        "./src/**/*.{js,ts,jsx,tsx,mdx}",
-        "./node_modules/@jusoren/ui/dist/**/*.js",
-      ],
-      presets: [sharedConfig],
-    };
-
-    export default config;
-    ```
-
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```js copy
-    const sharedConfig = require("@jusoren/ui/tailwind.config.js");
-
-    /** @type {import('tailwindcss').Config} */
-    module.exports = {
-      content: [
-        "./src/**/*.{js,ts,jsx,tsx,mdx}",
-        "./node_modules/@jusoren/ui/dist/**/*.js",
-      ],
-      presets: [sharedConfig],
-    };
-    ```
-
-  </Tabs.Tab>
-</Tabs>
-
-Next, you'll need to import `base.css` file once in the root component. If you're using Next.js,
-it should be `app/layout.tsx` file.
+Next, you'll need to import `base.css` file once in the root component. If you're using Next.js, it should be `app/layout.tsx` file.
+This css file loads `Manrope` font, adds `@tailwind` directives, and sets appropiate global styles.
 
 ```js copy
 import "@jusoren/ui/base.css";
 ```
 
-That css file loads `Manrope` font, adds `@tailwind` directives, and sets appropiate global styles.
+That's it! Now, you can start using the components.
+
+```js filename="App.tsx" copy
+import { Button } from "@jusoren/ui";
+
+export default function App() {
+  return (
+    <div>
+      <Button>My Button</Button>
+    </div>
+  );
+}
+```
