@@ -7,5 +7,5 @@
   "minify": true,
   "clean": true,
   "external": ["react"],
-  "onSuccess": "cp base.css dist"
+  "onSuccess": "cp base.css dist && cp tailwind.config.js dist"
 }

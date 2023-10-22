@@ -14,12 +14,17 @@
     "./base.css": {
       "import": "./dist/base.css",
       "require": "./dist/base.css"
+    },
+    "./tailwind.config.js": {
+      "import": "./dist/tailwind.config.js",
+      "require": "./dist/tailwind.config.js"
     }
   },
   "license": "MIT",
   "scripts": {
     "build": "tsup",
     "lint": "eslint .",
+    "dev": "tsup --watch",
     "generate:component": "turbo gen react-component"
   },
   "devDependencies": {
