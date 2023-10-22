@@ -21,6 +21,11 @@
     }
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jusoren/ui"
+  },
+  "homepage": "https://ui.jusoren.com",
   "scripts": {
     "build": "tsup",
     "lint": "eslint .",
