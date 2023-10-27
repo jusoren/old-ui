@@ -1,9 +1,26 @@
 # Login
 
 import { Tabs } from "nextra/components";
+import Image from "next/image";
+import { Button, Container, H1, Input, P } from "ui";
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
+    <Container size="sm">
+      <Image src="/logoipsum-1.svg" alt="Logoipsum" width={130} height={45} />
+      <div className="mb-6" />
+      <H1 className="mb-1.5">Welcome Back</H1>
+      <P dimmed>{`Let's continue your journey again`}</P>
+
+      <div className="mt-10">
+        <Input id="email" name="email" placeholder="Your email addess" className="mb-6" />
+        <Input id="password" name="password" placeholder="Your password" className="mb-8" />
+        <Button variant="primary" fullWidth>
+          Login
+        </Button>
+      </div>
+    </Container>
+
   </Tabs.Tab>
   <Tabs.Tab>
     ```js copy
