@@ -8,6 +8,7 @@ export interface ContainerProps {
   size?: ContainerSize;
   middle?: boolean;
   compact?: boolean;
+  className?: string;
 }
 
 export const Container = ({
@@ -15,6 +16,7 @@ export const Container = ({
   size = "md",
   middle,
   compact = false,
+  className,
 }: ContainerProps) => {
   return (
     <div
@@ -26,7 +28,8 @@ export const Container = ({
         size === "xs" && "max-w-sm",
         size === "sm" && "max-w-sm",
         size === "md" && "max-w-screen-2xl",
-        middle && "items-center justify-center"
+        middle && "items-center justify-center",
+        className
       )}
       style={{
         minHeight: "auto",

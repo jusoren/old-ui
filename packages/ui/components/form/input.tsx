@@ -43,7 +43,7 @@ export const Input = ({
           "transition",
           "text-base",
           variant === "default" &&
-            "dark:bg-neutral-800 dark:border-neutral-700 dark:placeholder-neutral-500 " +
+            "dark:bg-neutral-800 dark:border-neutral-700 dark:placeholder-neutral-400 " +
               "bg-neutral-50 border-neutral-300 placeholder-neutral-400" +
               "dark:dark-autofill",
           // "text-fill-neutral-100 dark:text-fill-primary-500",

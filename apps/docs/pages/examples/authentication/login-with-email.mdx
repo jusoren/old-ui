@@ -1,0 +1,93 @@
+# Login with Email
+
+import { Tabs } from "nextra/components";
+import { Button, Container, H1, Input, Label, P } from "ui";
+
+<Tabs items={['Preview', 'Code']}>
+  <Tabs.Tab>
+    <Container size="sm" className="py-7 text-center">
+      <a href="#logoipsum" className="mx-auto mb-10">
+        <img src="/logoipsum-1.svg" alt="Logoipsum" className="h-7" />
+      </a>
+      <H1 className="mb-2">Continue with Email</H1>
+      <P dimmed>{`Fill-in these inputs below to proceed`}</P>
+
+      <div className="text-left mt-12">
+        <Label htmlFor="email">
+          Email
+        </Label>
+        <Input id="email" name="email" placeholder="Your email addess" className="mb-6" />
+
+        <div className="flex justify-between">
+          <Label htmlFor="password">
+            Password
+          </Label>
+          <a href="#forgot-password" className="link">
+            Forgot password?
+          </a>
+        </div>
+        <Input id="password" name="password" placeholder="Your password" className="mb-8" />
+
+        <Button variant="primary" fullWidth>
+          Login
+        </Button>
+      </div>
+
+      <P dimmed className="mt-6">
+        {`Don't have an account? `}
+        <a href="#" className="link">Sign up</a>
+      </P>
+      <a href="#other" className="link mt-3.5">
+        View other login options
+      </a>
+    </Container>
+
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```js copy
+    import { Button, Container, H1, Input, Label, P } from "@jusoren/ui";
+
+    export function LoginWithEmail() {
+      return (
+        <Container size="sm" className="py-7 text-center">
+          <a href="#logoipsum" className="mx-auto mb-10">
+            <img src="/logoipsum-1.svg" alt="Logoipsum" className="h-7" />
+          </a>
+          <H1 className="mb-2">Continue with Email</H1>
+          <P dimmed>{`Fill-in these inputs below to proceed`}</P>
+
+          <div className="text-left mt-12">
+            <Label htmlFor="email">
+              Email
+            </Label>
+            <Input id="email" name="email" placeholder="Your email addess" className="mb-6" />
+
+            <div className="flex justify-between">
+              <Label htmlFor="password">
+                Password
+              </Label>
+              <a href="#forgot-password" className="link">
+                Forgot password?
+              </a>
+            </div>
+            <Input id="password" name="password" placeholder="Your password" className="mb-8" />
+
+            <Button variant="primary" fullWidth>
+              Login
+            </Button>
+          </div>
+
+          <P dimmed className="mt-6">
+            {`Don't have an account? `}
+            <a href="#" className="link">Sign up</a>
+          </P>
+          <a href="#other" className="link mt-3.5">
+            View other login options
+          </a>
+        </Container>
+      )
+    }
+    ```
+
+  </Tabs.Tab>
+</Tabs>

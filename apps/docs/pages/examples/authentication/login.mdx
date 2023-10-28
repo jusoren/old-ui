@@ -1,22 +1,35 @@
 # Login
 
 import { Tabs } from "nextra/components";
-import Image from "next/image";
-import { Button, Container, H1, Input, P } from "ui";
+import { Button, Container, H1, P } from "ui";
+import { FcGoogle } from "react-icons/fc";
+import { GrGithub, GrMail } from "react-icons/gr";
+import { TbMailFilled } from "react-icons/tb";
 
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Container size="sm">
-      <Image src="/logoipsum-1.svg" alt="Logoipsum" width={130} height={45} />
-      <div className="mb-6" />
-      <H1 className="mb-1.5">Welcome Back</H1>
+    <Container size="sm" className="py-7 text-center">
+      <a href="#logoipsum" className="mx-auto mb-10">
+        <img src="/logoipsum-1.svg" alt="Logoipsum" className="h-7" />
+      </a>
+      <H1 className="mb-2">Welcome Back</H1>
       <P dimmed>{`Let's continue your journey again`}</P>
 
-      <div className="mt-10">
-        <Input id="email" name="email" placeholder="Your email addess" className="mb-6" />
-        <Input id="password" name="password" placeholder="Your password" className="mb-8" />
-        <Button variant="primary" fullWidth>
-          Login
+      <div className="grid grid-cols-1 gap-5 mt-12">
+        <Button fullWidth leftIcon={<FcGoogle size={20} />}>
+          Continue with Google
+        </Button>
+
+        <Button fullWidth leftIcon={<img src="/microsoft.svg" className="w-4 h-4" />}>
+          Continue with Microsoft
+        </Button>
+
+        <Button fullWidth leftIcon={<GrGithub size={20} />}>
+          Continue with Github
+        </Button>
+
+        <Button fullWidth leftIcon={<GrMail size={20} />}>
+          Continue with Email
         </Button>
       </div>
     </Container>
@@ -24,9 +37,40 @@ import { Button, Container, H1, Input, P } from "ui";
   </Tabs.Tab>
   <Tabs.Tab>
     ```js copy
-    let a = 1;
+    import { Button, Container, H1, P } from "@jusoren/ui";
+    import { FcGoogle } from "react-icons/fc";
+    import { GrGithub, GrMail } from "react-icons/gr";
+    import { TbMailFilled } from "react-icons/tb";
 
-    console.log(a);
+    export function Login() {
+      return (
+        <Container size="sm" className="py-7 text-center">
+          <a href="#logoipsum" className="mx-auto mb-10">
+            <img src="/logoipsum-1.svg" alt="Logoipsum" className="h-7" />
+          </a>
+          <H1 className="mb-2">Welcome Back</H1>
+          <P dimmed>{`Let's continue your journey again`}</P>
+
+          <div className="grid grid-cols-1 gap-5 mt-12">
+            <Button fullWidth leftIcon={<FcGoogle size={20} />}>
+              Continue with Google
+            </Button>
+
+            <Button fullWidth leftIcon={<img src="/microsoft.svg" className="w-4 h-4" />}>
+              Continue with Microsoft
+            </Button>
+
+            <Button fullWidth leftIcon={<GrGithub size={20} />}>
+              Continue with Github
+            </Button>
+
+            <Button fullWidth leftIcon={<GrMail size={20} />}>
+              Continue with Email
+            </Button>
+          </div>
+        </Container>
+      )
+    }
     ```
 
   </Tabs.Tab>

@@ -33,6 +33,7 @@ export function Button<T extends React.ElementType = "button">({
   rounded = false,
   variant = "default",
   disabled = false,
+  leftIcon,
   ...rest
 }: ButtonProps<T> &
   Omit<React.ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>): JSX.Element {
@@ -68,8 +69,8 @@ export function Button<T extends React.ElementType = "button">({
           "border-none dark:text-neutral-300 dark:bg-neutral-600/30",
         size === "xs" && !square && "px-2.5 h-8 text-xs gap-2",
         size === "sm" && !square && "px-3 h-9 text-sm gap-2",
-        size === "md" && !square && "px-3.5 h-10 text-base gap-2.5",
-        size === "lg" && !square && "px-4 h-11 text-lg gap-2.5",
+        size === "md" && !square && "px-3.5 h-10 text-base gap-3",
+        size === "lg" && !square && "px-4 h-11 text-lg gap-3.5",
         size === "xs" && square && "w-8 h-8",
         size === "sm" && square && "w-9 h-9",
         size === "md" && square && "w-10 h-10",
@@ -83,7 +84,8 @@ export function Button<T extends React.ElementType = "button">({
       )}
       {...rest}
     >
-      <span className="flex-1">{children}</span>
+      {leftIcon && <div className="flex-shrink-0">{leftIcon}</div>}
+      <span className="">{children}</span>
     </Component>
   );
 }
